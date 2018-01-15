@@ -33,8 +33,8 @@ after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       docker login --username="${DOCKER_REGISTRY_USER}" --password="${DOCKER_REGISTRY_PASSWORD}";
       docker push $image;
-      docker tag $image xutl/nginx:${OS_NAME}:${OS_VERSION};
-      docker push xutl/${OS_NAME}:${OS_VERSION};
+      docker tag $image xutl/nginx:${VERSION};
+      docker push xutl/nginx:${VERSION};
       if [[ "${VERSION}" == "1.13.8" && "${OS_SUITE}" == "xenial" ]]; then
         docker tag $image xutl/nginx:1.13;
         docker push xutl/nginx:1.13;
