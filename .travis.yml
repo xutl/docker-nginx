@@ -46,6 +46,8 @@ after_success:
       if [[ "${VERSION}" == "1.12.2" && "${OS_SUITE}" == "xenial" ]]; then
         docker tag $image xutl/nginx:stable;
         docker push xutl/nginx:stable;
+        docker tag $image xutl/nginx:1.12;
+        docker push xutl/nginx:1.12;
       fi;
     fi;
 
