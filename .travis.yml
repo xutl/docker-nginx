@@ -23,7 +23,7 @@ before_install:
 
 before_script:
   - env | sort
-  - cd "$NGINX_SUITE/$OS_SUITE"
+  - cd "$OS_SUITE/$NGINX_SUITE"
   - image="xutl/nginx:${VERSION}-${OS_SUITE}"
 
 script:
