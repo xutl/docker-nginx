@@ -2,9 +2,11 @@ FROM xutl/alpine:3.7
 
 LABEL maintainer="xutongle@gmail.com"
 
+# persistent / runtime deps
+ENV BUILD_DEPS autoconf dpkg-dev file g++ gcc libc-dev make linux-headers pcre-dev zlib-dev libressl-dev libxml2-dev libxslt-dev gd-dev
+
 RUN set -x \
-	&& echo -e "https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.7/main\nhttps://mirrors.tuna.tsinghua.edu.cn/alpine/v3.7/community" > /etc/apk/repositories \
-	&& apk add --no-cache curl tar libressl libxml2 libxslt libbz2 libzip libgd3 \
+	&& apk add --no-cache pcre zlib gd \
 	&& addgroup -g 82 -S www-data \
 	&& adduser -u 82 -D -S -G www-data www-data
 # 82 is the standard uid/gid for "www-data" in Alpine
@@ -17,23 +19,8 @@ ENV NGINX_TGZ_URL http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 ENV NGINX_INI_DIR=/usr/local/etc/nginx
 
 RUN set -xe \
-	&& buildDeps=" \
-		autoconf \
-		file \
-		g++ \
-		gcc \
-		libc-dev \
-		make \
-		linux-headers \
-		pcre-dev \
-		zlib-dev \
-		libressl-dev \
-		libxml2-dev \
-		libxslt-dev \
-		gd-dev \
-	" \
 	&& apk add --no-cache --virtual .build-deps \
-	    $buildDeps  \
+	    $BUILD_DEPS  \
 	&& cd /tmp \
 	&& curl -fSL ${NGINX_TGZ_URL} -o nginx-${NGINX_VERSION}.tar.gz \
 	&& tar zxf nginx-${NGINX_VERSION}.tar.gz \
