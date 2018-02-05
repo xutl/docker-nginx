@@ -10,12 +10,12 @@ env:
   - OS_SUITE=alpine NGINX_SUITE=mainline VERSION=1.13.8
   - OS_SUITE=alpine NGINX_SUITE=stable VERSION=1.12.2
 #   Debian
-  - OS_SUITE=stretch NGINX_SUITE=mainline VERSION=1.13.8
-  - OS_SUITE=stretch NGINX_SUITE=stable VERSION=1.12.2
+#  - OS_SUITE=stretch NGINX_SUITE=mainline VERSION=1.13.8
+#  - OS_SUITE=stretch NGINX_SUITE=stable VERSION=1.12.2
 
 #   Ubuntu
-  - OS_SUITE=xenial NGINX_SUITE=mainline VERSION=1.13.8
-  - OS_SUITE=xenial NGINX_SUITE=stable VERSION=1.12.2
+#  - OS_SUITE=xenial NGINX_SUITE=mainline VERSION=1.13.8
+#  - OS_SUITE=xenial NGINX_SUITE=stable VERSION=1.12.2
 
 before_install:
   - export DOCKER_COMPOSE_VERSION=1.18.0

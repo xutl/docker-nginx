@@ -34,19 +34,16 @@ RUN set -xe \
 		make \
 		re2c \
 		linux-headers \
-		libpcre3-dev \
-		libcurl4-openssl-dev \
-		libssl-dev \
-		libbz2-dev \
+		pcre-dev \
+		zlib-dev \
+		libressl-dev \
 		libxml2-dev \
-		libzip-dev \
 		libxslt-dev \
-		libgd-dev \
+		gd-dev \
 	" \
-#	&& sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/' /etc/apt/sources.list \
-	&& apt-get update && apt-get install -y --no-install-recommends --no-install-suggests libgd3 supervisor $buildDeps && rm -r /var/lib/apt/lists/* \
-	\
-	&& cd /usr/local/src \
+	&& apk add --no-cache --virtual .build-deps \
+	    $buildDeps  \
+	&& cd /tmp \
 	&& curl -fSL ${NGINX_TGZ_URL} -o nginx-${NGINX_VERSION}.tar.gz \
 	&& tar zxf nginx-${NGINX_VERSION}.tar.gz \
 	&& rm -rf nginx-${NGINX_VERSION}.tar.gz \
@@ -89,8 +86,9 @@ RUN set -xe \
 	&& make -j "$(nproc)" \
 	&& make install \
 	&& mkdir -p /var/lib/nginx \
-	&& rm -rf /usr/local/src/nginx-${NGINX_VERSION} \
-	&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $buildDeps
+	&& rm -rf /tmp/nginx-${NGINX_VERSION} \
+	\
+	&& apk del .build-deps
 
 # Add configuration files
 COPY image-files/ /
