@@ -3,7 +3,7 @@ FROM xutl/alpine:3.7
 LABEL maintainer="xutongle@gmail.com"
 
 # persistent / runtime deps
-ENV BUILD_DEPS autoconf dpkg-dev file g++ gcc libc-dev make linux-headers pcre-dev zlib-dev libressl-dev libxml2-dev libxslt-dev gd-dev
+ENV BUILD_DEPS autoconf dpkg-dev file g++ gcc libc-dev make linux-headers curl pcre-dev zlib-dev libressl-dev libxml2-dev libxslt-dev gd-dev
 
 RUN set -x \
 	&& apk add --no-cache pcre zlib libressl libxml2 libxslt gd \
