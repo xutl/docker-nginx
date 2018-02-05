@@ -25,6 +25,15 @@ ENV NGINX_INI_DIR=/usr/local/etc/nginx
 
 RUN set -xe \
 	&& buildDeps=" \
+		autoconf \
+		dpkg-dev \
+		file \
+		g++ \
+		gcc \
+		libc-dev \
+		make \
+		re2c \
+		linux-headers \
 		libpcre3-dev \
 		libcurl4-openssl-dev \
 		libssl-dev \
