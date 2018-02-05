@@ -7,6 +7,9 @@ services:
 
 env:
 #   Debian
+  - OS_SUITE=alpine NGINX_SUITE=mainline VERSION=1.13.8
+  - OS_SUITE=alpine NGINX_SUITE=stable VERSION=1.12.2
+#   Debian
   - OS_SUITE=stretch NGINX_SUITE=mainline VERSION=1.13.8
   - OS_SUITE=stretch NGINX_SUITE=stable VERSION=1.12.2
 
@@ -35,7 +38,7 @@ after_success:
       docker push $image;
       docker tag $image xutl/nginx:${VERSION};
       docker push xutl/nginx:${VERSION};
-      if [[ "${VERSION}" == "1.13.8" && "${OS_SUITE}" == "xenial" ]]; then
+      if [[ "${VERSION}" == "1.13.8" && "${OS_SUITE}" == "alpine" ]]; then
         docker tag $image xutl/nginx:1.13;
         docker push xutl/nginx:1.13;
         docker tag $image xutl/nginx:latest;
@@ -43,7 +46,7 @@ after_success:
         docker tag $image xutl/nginx:mainline;
         docker push xutl/nginx:mainline;
       fi;
-      if [[ "${VERSION}" == "1.12.2" && "${OS_SUITE}" == "xenial" ]]; then
+      if [[ "${VERSION}" == "1.12.2" && "${OS_SUITE}" == "alpine" ]]; then
         docker tag $image xutl/nginx:stable;
         docker push xutl/nginx:stable;
         docker tag $image xutl/nginx:1.12;
