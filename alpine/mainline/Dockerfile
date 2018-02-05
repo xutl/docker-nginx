@@ -6,7 +6,7 @@ LABEL maintainer="xutongle@gmail.com"
 ENV BUILD_DEPS autoconf dpkg-dev file g++ gcc libc-dev make linux-headers pcre-dev zlib-dev libressl-dev libxml2-dev libxslt-dev gd-dev
 
 RUN set -x \
-	&& apk add --no-cache pcre zlib gd \
+	&& apk add --no-cache pcre zlib libressl libxml2 libxslt gd \
 	&& addgroup -g 82 -S www-data \
 	&& adduser -u 82 -D -S -G www-data www-data
 # 82 is the standard uid/gid for "www-data" in Alpine
