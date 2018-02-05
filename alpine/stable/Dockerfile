@@ -3,15 +3,8 @@ FROM xutl/alpine:3.7
 LABEL maintainer="xutongle@gmail.com"
 
 RUN set -x \
-	&& apk add --no-cache --virtual .persistent-deps \
-		curl \
-		tar \
-		libressl \
-		libxml2 \
-		libxslt \
-		libbz2 \
-		libzip \
-		libgd3 \
+	&& echo -e "https://mirrors.tuna.tsinghua.edu.cn/alpine/v3.7/main\nhttps://mirrors.tuna.tsinghua.edu.cn/alpine/v3.7/community" > /etc/apk/repositories \
+	&& apk add --no-cache curl tar libressl libxml2 libxslt libbz2 libzip libgd3 \
 	&& addgroup -g 82 -S www-data \
 	&& adduser -u 82 -D -S -G www-data www-data
 # 82 is the standard uid/gid for "www-data" in Alpine
@@ -19,20 +12,18 @@ RUN set -x \
 ARG NGINX_VERSION
 
 # Environment settings
-ENV NGINX_VERSION=${NGINX_VERSION:-1.13.8}
+ENV NGINX_VERSION=${NGINX_VERSION:-1.12.2}
 ENV NGINX_TGZ_URL http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 ENV NGINX_INI_DIR=/usr/local/etc/nginx
 
 RUN set -xe \
 	&& buildDeps=" \
 		autoconf \
-		dpkg-dev \
 		file \
 		g++ \
 		gcc \
 		libc-dev \
 		make \
-		re2c \
 		linux-headers \
 		pcre-dev \
 		zlib-dev \
