@@ -65,6 +65,7 @@ RUN set -xe \
 	&& make install \
 	&& mkdir -p /var/lib/nginx \
 	&& mkdir -p /usr/local/etc/nginx/sites \
+	&& rm -f /usr/local/etc/nginx/scgi_* \
 	&& rm -rf /tmp/nginx-${NGINX_VERSION} \
 	\
 	&& apk del .build-deps

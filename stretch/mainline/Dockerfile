@@ -83,6 +83,7 @@ RUN set -xe \
 	&& make install \
 	&& mkdir -p /var/lib/nginx \
 	&& mkdir -p /usr/local/etc/nginx/sites \
+	&& rm -f /usr/local/etc/nginx/scgi_* \
 	&& rm -rf /usr/local/src/nginx-${NGINX_VERSION} \
 	&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $buildDeps
 
