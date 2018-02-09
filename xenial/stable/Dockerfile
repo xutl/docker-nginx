@@ -82,6 +82,7 @@ RUN set -xe \
 	&& make -j "$(nproc)" \
 	&& make install \
 	&& mkdir -p /var/lib/nginx \
+	&& mkdir -p /usr/local/etc/nginx/sites \
 	&& rm -rf /usr/local/src/nginx-${NGINX_VERSION} \
 	&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $buildDeps
 
